@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 
+import { AbsencePage } from "./Pages/AbsencePage";
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Hello</h1>
-      </header>
+        <AbsencePage />
     </div>
   );
 }
