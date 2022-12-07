@@ -1,0 +1,16 @@
+.filters {
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.absence-type .absence-date {
+    float: left;
+}
+
+.absence-date {
+    margin-left: 3px;
+}
+
+.heading {
+    margin: 0;
+}
