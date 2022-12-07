@@ -6,3 +6,7 @@
 .total-count {
     margin: 2px 0;
 }
+
+.no-data {
+    padding-top: 30px;
+}

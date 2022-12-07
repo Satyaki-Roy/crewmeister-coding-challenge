@@ -35,37 +35,41 @@ export const BasicTable = (props: React.PropsWithChildren<Props>): JSX.Element =
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{minWidth: 650}} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center"><b>Member Name</b></TableCell>
-              <TableCell align="center"><b>Type of absence</b></TableCell>
-              <TableCell align="center"><b>Period</b></TableCell>
-              <TableCell align="center"><b>Member note</b></TableCell>
-              <TableCell align="center"><b>Status</b></TableCell>
-              <TableCell align="center"><b>Admitter note</b></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {paginatedDataList?.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-              >
-                <TableCell align="center" component="th" scope="row">
-                  {row.memberName}
-                </TableCell>
-                <TableCell align="center">{row.typeOfAbsence}</TableCell>
-                <TableCell align="center">{row.period}</TableCell>
-                <TableCell align="center">{row.memberNote}</TableCell>
-                <TableCell align="center">{row.status}</TableCell>
-                <TableCell align="center">{row.admitterNote}</TableCell>
+      {(paginatedDataList?.length === 0) ? (
+        <p className="no-data">No Data</p>
+      ) : (
+        <TableContainer component={Paper}>
+          <Table sx={{minWidth: 650}} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center"><b>Member Name</b></TableCell>
+                <TableCell align="center"><b>Type of absence</b></TableCell>
+                <TableCell align="center"><b>Period</b></TableCell>
+                <TableCell align="center"><b>Member note</b></TableCell>
+                <TableCell align="center"><b>Status</b></TableCell>
+                <TableCell align="center"><b>Admitter note</b></TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {paginatedDataList?.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                >
+                  <TableCell align="center" component="th" scope="row">
+                    {row.memberName}
+                  </TableCell>
+                  <TableCell align="center">{row.typeOfAbsence}</TableCell>
+                  <TableCell align="center">{row.period}</TableCell>
+                  <TableCell align="center">{row.memberNote}</TableCell>
+                  <TableCell align="center">{row.status}</TableCell>
+                  <TableCell align="center">{row.admitterNote}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
       <br/>
       <div className="center">
         <Pagination

@@ -17,3 +17,10 @@
 .button {
     padding-top: 18px;
 }
+
+.loading, .error-state {
+    position:absolute;
+    left:0;
+    right:0;
+    top: 50%;
+}

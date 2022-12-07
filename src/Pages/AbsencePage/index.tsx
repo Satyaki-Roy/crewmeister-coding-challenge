@@ -9,7 +9,7 @@ import BasicDateRangePicker from "../../components/BasicDateRangePicker";
 import {DateRange} from "@mui/x-date-pickers-pro/DateRangePicker";
 import {Dayjs} from "dayjs";
 import {checkIfTheDateIsBetween} from "../../utils/checkIfTheDateIsBetween";
-import Button from '@mui/material/Button';
+import {Button, CircularProgress} from '@mui/material';
 
 export interface Props {
 }
@@ -28,6 +28,8 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
   (AbsencePage as React.FC).displayName = 'AbsencePage';
   const {} = props;
 
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isErrorState, setIsErrorState] = useState<boolean>(false)
   const [absencesList, setAbsencesList] = useState<Array<any>>([]);
   const [membersList, setMembersList] = useState<Array<any>>([]);
   const [dataList, setDataList] = useState<DataList[]>([]);
@@ -38,8 +40,13 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
   const [isFilterValueChanged, setIsFilterValueChanged] = useState<boolean>(false);
 
   useEffect(() => {
-    setAbsencesList(absences.payload);
-    setMembersList(members.payload);
+    if (absences.message !== "Success" || members.message !== "Success") {
+      setIsErrorState(true);
+    } else {
+      setIsErrorState(false);
+      setAbsencesList(absences.payload);
+      setMembersList(members.payload);
+    }
   }, [])
 
   const prepareData = (e: any): DataList => {
@@ -56,8 +63,12 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
   }
 
   useEffect(() => {
-    const data: DataList[] = absencesList.map(prepareData)
-    setDataList(data)
+    // just to demo the loading state
+    setTimeout(() => {
+      const data: DataList[] = absencesList.map(prepareData);
+      setDataList(data);
+      setIsLoading(false);
+    }, 1000)
   }, [absencesList, membersList])
 
   useEffect(() => {
@@ -106,7 +117,13 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
     setIsDateFilterApplied(false);
   }
 
-  return (
+  return isErrorState ? (
+    <>
+      <div className="error-state">
+        <p>Error occurred, please refresh the browser and try to load again.</p>
+      </div>
+    </>
+  ) : (
     <>
       <h1 className="heading">Absence Page</h1>
       <div className="filters">
@@ -119,7 +136,7 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
           <BasicDateRangePicker dateRangeValue={dateRangeValue} setDateRangeValue={setDateRangeValue}/>
         </div>
       </div>
-      <BasicTable dataList={dataList}/>
+      {isLoading ? <div className="loading"><CircularProgress /></div> : <BasicTable dataList={dataList}/>}
     </>
   );
 };
