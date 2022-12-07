@@ -32,7 +32,10 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
   const [membersList, setMembersList] = useState<Array<any>>([]);
   const [dataList, setDataList] = useState<DataList[]>([]);
   const [absenceType, setAbsenceType] = useState<string>('');
+  const [isAbsenceFilterApplied, setIsAbsenceFilterApplied] = useState<boolean>(false);
   const [dateRangeValue, setDateRangeValue] = React.useState<DateRange<Dayjs>>([null, null]);
+  const [isDateFilterApplied, setIsDateFilterApplied] = useState<boolean>(false);
+  const [isFilterValueChanged, setIsFilterValueChanged] = useState<boolean>(false);
 
   useEffect(() => {
     setAbsencesList(absences.payload);
@@ -55,29 +58,52 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
   useEffect(() => {
     const data: DataList[] = absencesList.map(prepareData)
     setDataList(data)
-  }, [absencesList, membersList, dateRangeValue])
+  }, [absencesList, membersList])
 
   useEffect(() => {
-    const data: DataList[] = absencesList.map(prepareData)
     if (absenceType === "") {
-      setDataList(data);
+      setIsAbsenceFilterApplied(false);
     } else {
-      setDataList(data.filter(e => e.typeOfAbsence === absenceType));
+      setIsAbsenceFilterApplied(true);
     }
+    setIsFilterValueChanged((prevState) => !prevState);
   }, [absenceType])
 
   useEffect(() => {
     if (dateRangeValue[0] && dateRangeValue[1]) {
+      setIsDateFilterApplied(true)
+    }
+    setIsFilterValueChanged((prevState) => !prevState);
+  }, [dateRangeValue])
+
+  useEffect(() => {
+    if (isAbsenceFilterApplied && isDateFilterApplied) {
+      const data: DataList[] = absencesList
+        .filter(e => checkIfTheDateIsBetween(e.startDate, e.endDate, dateRangeValue[0], dateRangeValue[1]))
+        .map(prepareData)
+        .filter(e => e.typeOfAbsence === absenceType);
+      setDataList(data);
+    } else if (isAbsenceFilterApplied && !isDateFilterApplied) {
+      const data: DataList[] = absencesList
+        .map(prepareData)
+        .filter(e => e.typeOfAbsence === absenceType);
+      setDataList(data);
+    } else if (!isAbsenceFilterApplied && isDateFilterApplied) {
       const data: DataList[] = absencesList
         .filter(e => checkIfTheDateIsBetween(e.startDate, e.endDate, dateRangeValue[0], dateRangeValue[1]))
         .map(prepareData);
       setDataList(data);
+    } else if (!(isAbsenceFilterApplied && isDateFilterApplied)) {
+      const data: DataList[] = absencesList.map(prepareData)
+      setDataList(data)
     }
-  }, [dateRangeValue])
+  }, [isAbsenceFilterApplied, isDateFilterApplied, isFilterValueChanged])
 
   const removeAllFilters = (event: React.MouseEvent<HTMLElement>) => {
-    setAbsenceType('')
-    setDateRangeValue([null, null])
+    setAbsenceType('');
+    setIsAbsenceFilterApplied(false);
+    setDateRangeValue([null, null]);
+    setIsDateFilterApplied(false);
   }
 
   return (
