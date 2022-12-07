@@ -5,6 +5,11 @@ import members from "../../api/json_files/members.json";
 import {calculateDays} from "../../utils/calculateDays";
 import Filter from "../../components/Filter";
 import "./AbsencePage.css"
+import BasicDateRangePicker from "../../components/BasicDateRangePicker";
+import {DateRange} from "@mui/x-date-pickers-pro/DateRangePicker";
+import {Dayjs} from "dayjs";
+import {checkIfTheDateIsBetween} from "../../utils/checkIfTheDateIsBetween";
+import Button from '@mui/material/Button';
 
 export interface Props {
 }
@@ -27,6 +32,7 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
   const [membersList, setMembersList] = useState<Array<any>>([]);
   const [dataList, setDataList] = useState<DataList[]>([]);
   const [absenceType, setAbsenceType] = useState<string>('');
+  const [dateRangeValue, setDateRangeValue] = React.useState<DateRange<Dayjs>>([null, null]);
 
   useEffect(() => {
     setAbsencesList(absences.payload);
@@ -49,7 +55,7 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
   useEffect(() => {
     const data: DataList[] = absencesList.map(prepareData)
     setDataList(data)
-  }, [absencesList, membersList])
+  }, [absencesList, membersList, dateRangeValue])
 
   useEffect(() => {
     const data: DataList[] = absencesList.map(prepareData)
@@ -60,6 +66,20 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
     }
   }, [absenceType])
 
+  useEffect(() => {
+    if (dateRangeValue[0] && dateRangeValue[1]) {
+      const data: DataList[] = absencesList
+        .filter(e => checkIfTheDateIsBetween(e.startDate, e.endDate, dateRangeValue[0], dateRangeValue[1]))
+        .map(prepareData);
+      setDataList(data);
+    }
+  }, [dateRangeValue])
+
+  const removeAllFilters = (event: React.MouseEvent<HTMLElement>) => {
+    setAbsenceType('')
+    setDateRangeValue([null, null])
+  }
+
   return (
     <>
       <h1 className="heading">Absence Page</h1>
@@ -68,7 +88,10 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
           <Filter label="Absence Type" menuItems={['sickness', 'vacation']}
                   value={absenceType} setValue={setAbsenceType}/>
         </div>
-        {/*<div className="absence-date"><Filter /></div>*/}
+        <div className="button"><Button onClick={removeAllFilters} variant="outlined">Remove All Filters</Button></div>
+        <div className="absence-date">
+          <BasicDateRangePicker dateRangeValue={dateRangeValue} setDateRangeValue={setDateRangeValue}/>
+        </div>
       </div>
       <BasicTable dataList={dataList}/>
     </>

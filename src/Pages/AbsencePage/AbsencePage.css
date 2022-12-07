@@ -1,16 +1,19 @@
 .filters {
     overflow: hidden;
     margin-bottom: 5px;
-}
-
-.absence-type .absence-date {
-    float: left;
+    display: flex;
+    justify-content: space-between;
 }
 
 .absence-date {
+    padding-top: 8px;
     margin-left: 3px;
 }
 
 .heading {
     margin: 0;
+}
+
+.button {
+    padding-top: 18px;
 }

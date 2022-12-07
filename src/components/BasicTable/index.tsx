@@ -39,12 +39,12 @@ export const BasicTable = (props: React.PropsWithChildren<Props>): JSX.Element =
         <Table sx={{minWidth: 650}} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">Member Name</TableCell>
-              <TableCell align="center">Type of absence</TableCell>
-              <TableCell align="center">Period</TableCell>
-              <TableCell align="center">Member note</TableCell>
-              <TableCell align="center">Status</TableCell>
-              <TableCell align="center">Admitter note</TableCell>
+              <TableCell align="center"><b>Member Name</b></TableCell>
+              <TableCell align="center"><b>Type of absence</b></TableCell>
+              <TableCell align="center"><b>Period</b></TableCell>
+              <TableCell align="center"><b>Member note</b></TableCell>
+              <TableCell align="center"><b>Status</b></TableCell>
+              <TableCell align="center"><b>Admitter note</b></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
