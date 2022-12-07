@@ -48,6 +48,8 @@ export const BasicTable = (props: React.PropsWithChildren<Props>): JSX.Element =
                 <TableCell align="center"><b>Member note</b></TableCell>
                 <TableCell align="center"><b>Status</b></TableCell>
                 <TableCell align="center"><b>Admitter note</b></TableCell>
+                <TableCell align="center"><b>Start Date</b></TableCell>
+                <TableCell align="center"><b>End Date</b></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -64,6 +66,8 @@ export const BasicTable = (props: React.PropsWithChildren<Props>): JSX.Element =
                   <TableCell align="center">{row.memberNote}</TableCell>
                   <TableCell align="center">{row.status}</TableCell>
                   <TableCell align="center">{row.admitterNote}</TableCell>
+                  <TableCell align="center">{row.startDate}</TableCell>
+                  <TableCell align="center">{row.endDate}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

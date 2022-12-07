@@ -22,6 +22,8 @@ export interface DataList {
   memberNote: string;
   status: 'Requested' | 'Confirmed' | 'Rejected';
   admitterNote: string;
+  startDate: string;
+  endDate: string;
 }
 
 export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element => {
@@ -59,6 +61,8 @@ export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element 
       // TODO: not sure how to handle rejected as of now.
       status: e.confirmedAt ? "Confirmed" : "Requested",
       admitterNote: e.admitterNote || "No Admitter Note",
+      startDate: e.startDate,
+      endDate: e.endDate
     }
   }
 
