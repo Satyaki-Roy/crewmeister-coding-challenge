@@ -2,7 +2,7 @@ import React from 'react';
 import {render, screen, waitFor} from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', async() => {
+test('Renders App Component and comparing with snapshot', async() => {
   const {container} = render(<App />);
   await waitFor(() => {
     expect(screen.getByText('Member Name')).toBeInTheDocument();
