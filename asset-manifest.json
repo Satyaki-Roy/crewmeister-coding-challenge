@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/crewmeister-coding-challenge/static/css/main.237fc909.css",
-    "main.js": "/crewmeister-coding-challenge/static/js/main.7963794f.js",
+    "main.js": "/crewmeister-coding-challenge/static/js/main.ca743061.js",
     "static/js/787.885d70bd.chunk.js": "/crewmeister-coding-challenge/static/js/787.885d70bd.chunk.js",
     "index.html": "/crewmeister-coding-challenge/index.html",
     "main.237fc909.css.map": "/crewmeister-coding-challenge/static/css/main.237fc909.css.map",
-    "main.7963794f.js.map": "/crewmeister-coding-challenge/static/js/main.7963794f.js.map",
+    "main.ca743061.js.map": "/crewmeister-coding-challenge/static/js/main.ca743061.js.map",
     "787.885d70bd.chunk.js.map": "/crewmeister-coding-challenge/static/js/787.885d70bd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.237fc909.css",
-    "static/js/main.7963794f.js"
+    "static/js/main.ca743061.js"
   ]
 }
