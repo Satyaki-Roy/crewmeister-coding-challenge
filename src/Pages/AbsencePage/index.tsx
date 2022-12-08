@@ -11,9 +11,6 @@ import {Dayjs} from "dayjs";
 import {checkIfTheDateIsBetween} from "../../utils/checkIfTheDateIsBetween";
 import {Button, CircularProgress} from '@mui/material';
 
-export interface Props {
-}
-
 export interface DataList {
   id: number
   memberName: string;
@@ -26,9 +23,8 @@ export interface DataList {
   endDate: string;
 }
 
-export const AbsencePage = (props: React.PropsWithChildren<Props>): JSX.Element => {
+export const AbsencePage = (): JSX.Element => {
   (AbsencePage as React.FC).displayName = 'AbsencePage';
-  const {} = props;
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isErrorState, setIsErrorState] = useState<boolean>(false)
