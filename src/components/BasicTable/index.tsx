@@ -68,8 +68,8 @@ export const BasicTable = (props: React.PropsWithChildren<Props>): JSX.Element =
                   <TableCell align="center">{row.memberNote}</TableCell>
                   <TableCell align="center">{row.status}</TableCell>
                   <TableCell align="center">{row.admitterNote}</TableCell>
-                  <TableCell align="center">{row.startDate}</TableCell>
-                  <TableCell align="center">{row.endDate}</TableCell>
+                  <TableCell align="center">{new Date(row.startDate).toDateString()}</TableCell>
+                  <TableCell align="center">{new Date(row.endDate).toDateString()}</TableCell>
                   <TableCell align="center"><ExportIcalFile icalFileDetails={row}/></TableCell>
                 </TableRow>
               ))}
