@@ -13,8 +13,6 @@ export default function Filter(props: React.PropsWithChildren<Props>): JSX.Eleme
   (Filter as React.FC).displayName = 'Filter';
   const {label, menuItems, value, setValue} = props;
 
-  // const [value, setValue] = React.useState<string>('');
-
   const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value as string);
   };
