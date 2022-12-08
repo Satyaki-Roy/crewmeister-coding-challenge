@@ -8,4 +8,7 @@
 6. Once the above runs it will open the application on the browser
 7. Manually you can open the application using [http://localhost:3000](http://localhost:3000)
 
-## This project is available online at this [Link](https://satyaki-roy.github.io/crewmeister-coding-challenge/)
+### This project is available online at this [Link](https://satyaki-roy.github.io/crewmeister-coding-challenge/)
+
+### For deploying changes to GitHub Page use the below command.
+`npm run deploy -- -m "Deploy 2 React app to GitHub Pages"`
