@@ -11,4 +11,4 @@
 ### This project is available online at this [Link](https://satyaki-roy.github.io/crewmeister-coding-challenge/)
 
 ### For deploying changes to GitHub Page use the below command.
-`npm run deploy -- -m "Deploy 2 React app to GitHub Pages"`
+`npm run deploy -- -m "<message you want to give>"`
