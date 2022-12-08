@@ -12,6 +12,7 @@ import {
 import {DataList} from "../../Pages/AbsencePage";
 import './BasicTable.css';
 import {useEffect, useState} from "react";
+import ExportIcalFile from "../ExportIcalFile";
 
 export interface Props {
   dataList: DataList[]
@@ -50,6 +51,7 @@ export const BasicTable = (props: React.PropsWithChildren<Props>): JSX.Element =
                 <TableCell align="center"><b>Admitter note</b></TableCell>
                 <TableCell align="center"><b>Start Date</b></TableCell>
                 <TableCell align="center"><b>End Date</b></TableCell>
+                <TableCell align="center"><b>Export iCal File</b></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -68,6 +70,7 @@ export const BasicTable = (props: React.PropsWithChildren<Props>): JSX.Element =
                   <TableCell align="center">{row.admitterNote}</TableCell>
                   <TableCell align="center">{row.startDate}</TableCell>
                   <TableCell align="center">{row.endDate}</TableCell>
+                  <TableCell align="center"><ExportIcalFile icalFileDetails={row}/></TableCell>
                 </TableRow>
               ))}
             </TableBody>
